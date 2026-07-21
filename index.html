@@ -1,952 +1,311 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JRH Consultoria — Imposto de Renda e Assessoria Trabalhista</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy-deep:#0B1229;
-    --navy-card:#141B3C;
-    --navy-mid:#1E2A5E;
-    --navy-line:#26326a;
-    --gold:#F5B700;
-    --gold-dim:#c99900;
-    --text-hi:#FFFFFF;
-    --text-lo:#B9C0D6;
-    --text-faint:#7C84A6;
-    --green:#3ECF8E;
-    --red:#FF6B6B;
-    --radius:14px;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--navy-deep);
-    color:var(--text-hi);
-    font-family:'Inter',sans-serif;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:700;line-height:1.1;}
-  .mono{font-family:'IBM Plex Mono',monospace;}
-  a{text-decoration:none;color:inherit;}
-  img{max-width:100%;display:block;}
-  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
-  ::selection{background:var(--gold);color:var(--navy-deep);}
-
-  /* subtle grid texture on dark bg */
-  .grain-bg{
-    background-image:
-      radial-gradient(circle at 15% 10%, rgba(245,183,0,0.06), transparent 40%),
-      radial-gradient(circle at 85% 30%, rgba(62,207,142,0.04), transparent 35%),
-      linear-gradient(180deg, var(--navy-deep), var(--navy-deep));
-  }
-
-  /* ============ NAV ============ */
-  header{
-    position:sticky;top:0;z-index:100;
-    background:rgba(11,18,41,0.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--navy-line);
-  }
-  nav{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;max-width:1180px;margin:0 auto;}
-  .logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk';font-weight:700;font-size:19px;letter-spacing:-0.02em;}
-  .logo-mark{
-    width:38px;height:38px;border-radius:10px;
-    background:linear-gradient(135deg,var(--gold),#e0a600);
-    display:flex;align-items:center;justify-content:center;
-    color:var(--navy-deep);font-size:18px;font-weight:700;
-    box-shadow:0 4px 14px rgba(245,183,0,0.25);
-  }
-  .nav-links{display:flex;gap:34px;align-items:center;}
-  .nav-links a{font-size:14.5px;color:var(--text-lo);font-weight:500;transition:color .2s;}
-  .nav-links a:hover{color:var(--text-hi);}
-  .nav-cta{
-    background:var(--gold);color:var(--navy-deep);
-    padding:11px 22px;border-radius:999px;font-weight:700;font-size:14px;
-    transition:transform .2s, box-shadow .2s;
-  }
-  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(245,183,0,0.3);}
-  .burger{display:none;background:none;border:none;color:var(--text-hi);font-size:26px;cursor:pointer;}
-
-  /* ============ HERO ============ */
-  .hero{
-    padding:76px 0 40px;
-    position:relative;
-  }
-  .hero-grid{
-    display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
-  }
-  .eyebrow{
-    display:inline-flex;align-items:center;gap:8px;
-    background:rgba(245,183,0,0.1);border:1px solid rgba(245,183,0,0.3);
-    color:var(--gold);font-family:'IBM Plex Mono';font-size:12.5px;font-weight:600;
-    padding:7px 14px;border-radius:999px;letter-spacing:0.02em;margin-bottom:22px;
-  }
-  .eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px rgba(245,183,0,0.2);}
-  .hero h1{
-    font-size:clamp(34px,4.6vw,54px);
-    letter-spacing:-0.02em;
-    margin-bottom:20px;
-  }
-  .hero h1 .hl{color:var(--gold);}
-  .hero p.lede{
-    font-size:17.5px;color:var(--text-lo);line-height:1.65;max-width:520px;margin-bottom:32px;
-  }
-  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;}
-  .btn-primary{
-    background:var(--gold);color:var(--navy-deep);padding:15px 28px;border-radius:10px;
-    font-weight:700;font-size:15px;display:inline-flex;align-items:center;gap:8px;
-    transition:transform .2s, box-shadow .2s;border:none;cursor:pointer;
-  }
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(245,183,0,0.3);}
-  .btn-ghost{
-    background:transparent;border:1px solid var(--navy-line);color:var(--text-hi);
-    padding:15px 26px;border-radius:10px;font-weight:600;font-size:15px;
-    transition:border-color .2s, background .2s;
-  }
-  .btn-ghost:hover{border-color:var(--text-faint);background:rgba(255,255,255,0.03);}
-  .trust-row{display:flex;gap:28px;flex-wrap:wrap;}
-  .trust-item{display:flex;flex-direction:column;}
-  .trust-num{font-family:'Space Grotesk';font-size:23px;font-weight:700;color:var(--gold);}
-  .trust-label{font-size:12.5px;color:var(--text-faint);}
-
-  /* --- signature element: refund receipt / simulator card --- */
-  .receipt{
-    background:var(--navy-card);
-    border:1px solid var(--navy-line);
-    border-radius:16px;
-    padding:0;
-    position:relative;
-    box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
-    overflow:hidden;
-  }
-  .receipt-top{
-    background:linear-gradient(135deg,var(--navy-mid),var(--navy-card));
-    padding:22px 26px 18px;
-    border-bottom:1px dashed var(--navy-line);
-    display:flex;justify-content:space-between;align-items:flex-start;
-  }
-  .receipt-top .tag{font-family:'IBM Plex Mono';font-size:11.5px;color:var(--gold);letter-spacing:0.05em;}
-  .receipt-top h3{font-size:19px;margin-top:6px;}
-  .receipt-status{
-    background:rgba(62,207,142,0.12);color:var(--green);
-    font-family:'IBM Plex Mono';font-size:11px;font-weight:600;
-    padding:5px 10px;border-radius:6px;white-space:nowrap;
-  }
-  .receipt-body{padding:24px 26px;}
-  .sim-row{margin-bottom:18px;}
-  .sim-row label{
-    display:block;font-size:12.5px;color:var(--text-faint);margin-bottom:8px;
-    font-family:'IBM Plex Mono';
-  }
-  .sim-slider{
-    width:100%;accent-color:var(--gold);height:6px;
-  }
-  .sim-value{
-    font-family:'Space Grotesk';font-size:15px;color:var(--text-hi);font-weight:600;
-  }
-  .sim-select{
-    width:100%;background:var(--navy-deep);border:1px solid var(--navy-line);
-    color:var(--text-hi);padding:12px 14px;border-radius:8px;font-family:'Inter';font-size:14.5px;
-    appearance:none;cursor:pointer;
-  }
-  .sim-divider{height:1px;background:repeating-linear-gradient(90deg,var(--navy-line) 0 6px,transparent 6px 12px);margin:20px 0;}
-  .sim-result{
-    display:flex;justify-content:space-between;align-items:center;
-    background:rgba(245,183,0,0.08);border:1px solid rgba(245,183,0,0.25);
-    border-radius:10px;padding:16px 18px;
-  }
-  .sim-result-label{font-size:13px;color:var(--text-lo);}
-  .sim-result-value{font-family:'Space Grotesk';font-size:26px;font-weight:700;color:var(--gold);}
-  .receipt-cta{
-    display:block;text-align:center;background:var(--gold);color:var(--navy-deep);
-    padding:14px;font-weight:700;font-size:14.5px;margin-top:18px;border-radius:10px;
-  }
-  .receipt::before, .receipt::after{
-    content:'';position:absolute;width:24px;height:24px;background:var(--navy-deep);
-    border-radius:50%;top:130px;
-  }
-  .receipt::before{left:-12px;}
-  .receipt::after{right:-12px;}
-
-  /* ============ LOGO STRIP ============ */
-  .strip{padding:34px 0;border-top:1px solid var(--navy-line);border-bottom:1px solid var(--navy-line);}
-  .strip .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;}
-  .strip-label{font-family:'IBM Plex Mono';font-size:12px;color:var(--text-faint);letter-spacing:0.05em;}
-  .strip-items{display:flex;gap:38px;flex-wrap:wrap;}
-  .strip-items span{font-size:13.5px;color:var(--text-lo);font-weight:500;}
-
-  /* ============ SECTION HEADERS ============ */
-  section{padding:96px 0;}
-  .sec-head{max-width:640px;margin-bottom:56px;}
-  .sec-eyebrow{
-    font-family:'IBM Plex Mono';color:var(--gold);font-size:12.5px;font-weight:600;
-    letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;display:block;
-  }
-  .sec-head h2{font-size:clamp(28px,3.4vw,40px);letter-spacing:-0.02em;margin-bottom:14px;}
-  .sec-head p{color:var(--text-lo);font-size:16px;line-height:1.6;}
-  .sec-head.center{margin:0 auto 56px;text-align:center;}
-
-  /* ============ SERVICES ============ */
-  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-  .service-card{
-    background:var(--navy-card);border:1px solid var(--navy-line);border-radius:var(--radius);
-    padding:30px 26px;transition:transform .25s, border-color .25s;
-  }
-  .service-card:hover{transform:translateY(-4px);border-color:var(--gold-dim);}
-  .service-icon{
-    width:46px;height:46px;border-radius:11px;background:var(--navy-mid);
-    display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:18px;
-  }
-  .service-card h3{font-size:18.5px;margin-bottom:10px;}
-  .service-card p{color:var(--text-lo);font-size:14.5px;line-height:1.6;margin-bottom:16px;}
-  .service-card .service-link{color:var(--gold);font-size:13.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px;}
-
-  /* ============ DEADLINE BANNER ============ */
-  .deadline{
-    background:linear-gradient(120deg,var(--navy-mid),var(--navy-card));
-    border:1px solid var(--navy-line);border-radius:18px;
-    padding:38px 40px;display:flex;align-items:center;justify-content:space-between;gap:30px;flex-wrap:wrap;
-  }
-  .deadline-left h3{font-size:22px;margin-bottom:6px;}
-  .deadline-left p{color:var(--text-lo);font-size:14.5px;}
-  .countdown{display:flex;gap:14px;}
-  .countdown-box{
-    background:var(--navy-deep);border:1px solid var(--navy-line);border-radius:10px;
-    padding:14px 16px;text-align:center;min-width:70px;
-  }
-  .countdown-box .num{font-family:'Space Grotesk';font-size:24px;font-weight:700;color:var(--gold);}
-  .countdown-box .lbl{font-size:10.5px;color:var(--text-faint);font-family:'IBM Plex Mono';margin-top:2px;}
-
-  /* ============ PROCESS ============ */
-  .process{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
-  .process-step{padding:0 20px;position:relative;}
-  .process-step:not(:last-child)::after{
-    content:'';position:absolute;top:24px;right:-10px;width:20px;height:1px;
-    background:var(--navy-line);
-  }
-  .process-num{
-    font-family:'IBM Plex Mono';font-size:13px;color:var(--gold);
-    border:1px solid var(--navy-line);width:48px;height:48px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-weight:600;
-  }
-  .process-step h4{font-size:16.5px;margin-bottom:8px;}
-  .process-step p{font-size:13.5px;color:var(--text-lo);line-height:1.55;}
-
-  /* ============ TESTIMONIALS ============ */
-  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-  .testi-card{
-    background:var(--navy-card);border:1px solid var(--navy-line);border-radius:var(--radius);
-    padding:28px;
-  }
-  .stars{color:var(--gold);font-size:14px;margin-bottom:16px;letter-spacing:2px;}
-  .testi-card p{font-size:14.5px;color:var(--text-lo);line-height:1.65;margin-bottom:20px;}
-  .testi-author{display:flex;align-items:center;gap:12px;}
-  .testi-avatar{
-    width:38px;height:38px;border-radius:50%;background:var(--navy-mid);
-    display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk';font-weight:700;color:var(--gold);font-size:14px;
-  }
-  .testi-name{font-size:14px;font-weight:600;}
-  .testi-role{font-size:12px;color:var(--text-faint);}
-
-  /* ============ BLOG ============ */
-  .blog-header-row{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:56px;flex-wrap:wrap;gap:20px;}
-  .blog-header-row .sec-head{margin-bottom:0;}
-  .view-all{
-    font-size:14px;font-weight:600;color:var(--gold);display:flex;align-items:center;gap:6px;white-space:nowrap;
-  }
-  .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-  .blog-card{
-    background:var(--navy-card);border:1px solid var(--navy-line);border-radius:var(--radius);
-    overflow:hidden;transition:transform .25s, border-color .25s;
-  }
-  .blog-card:hover{transform:translateY(-4px);border-color:var(--gold-dim);}
-  .blog-thumb{
-    height:150px;background:linear-gradient(135deg,var(--navy-mid),var(--navy-deep));
-    position:relative;display:flex;align-items:center;justify-content:center;
-    border-bottom:1px solid var(--navy-line);
-  }
-  .blog-thumb .thumb-icon{font-size:38px;opacity:0.85;}
-  .blog-cat{
-    position:absolute;top:14px;left:14px;background:rgba(245,183,0,0.15);color:var(--gold);
-    font-family:'IBM Plex Mono';font-size:10.5px;font-weight:600;padding:5px 10px;border-radius:6px;
-  }
-  .blog-content{padding:22px 22px 24px;}
-  .blog-date{font-family:'IBM Plex Mono';font-size:11.5px;color:var(--text-faint);margin-bottom:10px;}
-  .blog-content h3{font-size:16.5px;line-height:1.35;margin-bottom:10px;}
-  .blog-content p{font-size:13.5px;color:var(--text-lo);line-height:1.6;margin-bottom:16px;}
-  .blog-read{font-size:13px;font-weight:600;color:var(--gold);}
-
-  /* featured post */
-  .blog-featured{
-    display:grid;grid-template-columns:1fr 1fr;gap:0;
-    background:var(--navy-card);border:1px solid var(--navy-line);border-radius:18px;
-    overflow:hidden;margin-bottom:24px;
-  }
-  .blog-featured-visual{
-    background:
-      repeating-linear-gradient(135deg, rgba(245,183,0,0.05) 0 2px, transparent 2px 24px),
-      linear-gradient(135deg,var(--navy-mid),var(--navy-deep));
-    display:flex;align-items:center;justify-content:center;padding:40px;position:relative;min-height:280px;
-  }
-  .featured-badge{
-    position:absolute;top:24px;left:24px;background:var(--gold);color:var(--navy-deep);
-    font-family:'IBM Plex Mono';font-size:11px;font-weight:700;padding:6px 12px;border-radius:6px;
-  }
-  .blog-featured-body{padding:44px 44px 44px 8px;display:flex;flex-direction:column;justify-content:center;}
-  .blog-featured-body .blog-date{margin-bottom:14px;}
-  .blog-featured-body h3{font-size:25px;margin-bottom:14px;letter-spacing:-0.01em;}
-  .blog-featured-body p{color:var(--text-lo);font-size:15px;line-height:1.65;margin-bottom:22px;}
-
-  /* big receipt icon for featured */
-  .mini-receipt{
-    width:170px;background:var(--navy-deep);border:1px solid var(--navy-line);border-radius:10px;padding:16px;
-  }
-  .mini-receipt .line{height:6px;background:var(--navy-mid);border-radius:3px;margin-bottom:8px;}
-  .mini-receipt .line.short{width:60%;}
-  .mini-receipt .line.gold{background:var(--gold);width:40%;}
-
-  /* ============ FAQ ============ */
-  .faq-list{max-width:760px;margin:0 auto;}
-  .faq-item{
-    border-bottom:1px solid var(--navy-line);padding:24px 0;cursor:pointer;
-  }
-  .faq-q{display:flex;justify-content:space-between;align-items:center;gap:20px;}
-  .faq-q h4{font-size:16.5px;font-weight:600;}
-  .faq-icon{
-    width:28px;height:28px;border-radius:50%;border:1px solid var(--navy-line);
-    display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;
-    color:var(--gold);transition:transform .3s;
-  }
-  .faq-item.open .faq-icon{transform:rotate(45deg);}
-  .faq-a{
-    max-height:0;overflow:hidden;transition:max-height .3s ease, padding-top .3s ease;
-    color:var(--text-lo);font-size:14.5px;line-height:1.65;
-  }
-  .faq-item.open .faq-a{max-height:200px;padding-top:16px;}
-
-  /* ============ FINAL CTA ============ */
-  .final-cta{
-    background:linear-gradient(135deg,var(--gold) 0%, #e6a800 100%);
-    border-radius:22px;padding:64px 50px;position:relative;overflow:hidden;
-    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:30px;
-  }
-  .final-cta::before{
-    content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;
-    border-radius:50%;background:rgba(255,255,255,0.12);
-  }
-  .final-cta::after{
-    content:'';position:absolute;left:30%;bottom:-90px;width:180px;height:180px;
-    border-radius:50%;background:rgba(11,18,41,0.06);
-  }
-  .final-cta-text{position:relative;z-index:1;max-width:480px;}
-  .final-cta-text h2{color:var(--navy-deep);font-size:clamp(26px,3.4vw,36px);margin-bottom:12px;letter-spacing:-0.02em;}
-  .final-cta-text p{color:rgba(11,18,41,0.75);font-size:15.5px;line-height:1.6;}
-  .final-cta-btn{
-    position:relative;z-index:1;background:var(--navy-deep);color:var(--gold);
-    padding:18px 34px;border-radius:12px;font-weight:700;font-size:15.5px;
-    display:inline-flex;align-items:center;gap:10px;white-space:nowrap;
-    transition:transform .2s;
-  }
-  .final-cta-btn:hover{transform:translateY(-3px);}
-
-  /* ============ FOOTER ============ */
-  footer{border-top:1px solid var(--navy-line);padding:60px 0 30px;}
-  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;margin-bottom:50px;}
-  .footer-brand p{color:var(--text-lo);font-size:14px;line-height:1.65;margin:16px 0 20px;max-width:280px;}
-  .footer-social{display:flex;gap:10px;}
-  .footer-social a{
-    width:36px;height:36px;border-radius:8px;border:1px solid var(--navy-line);
-    display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text-lo);
-    transition:border-color .2s, color .2s;
-  }
-  .footer-social a:hover{border-color:var(--gold);color:var(--gold);}
-  .footer-col h5{font-family:'IBM Plex Mono';font-size:12px;color:var(--text-faint);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:18px;}
-  .footer-col a{display:block;color:var(--text-lo);font-size:14px;margin-bottom:12px;transition:color .2s;}
-  .footer-col a:hover{color:var(--gold);}
-  .footer-bottom{
-    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
-    padding-top:26px;border-top:1px solid var(--navy-line);
-    font-size:12.5px;color:var(--text-faint);
-  }
-
-  /* ============ WHATSAPP FLOAT ============ */
-  .wa-float{
-    position:fixed;bottom:24px;right:24px;z-index:200;
-    width:58px;height:58px;border-radius:50%;background:var(--green);
-    display:flex;align-items:center;justify-content:center;font-size:26px;
-    box-shadow:0 10px 26px rgba(62,207,142,0.4);
-    animation:pulse 2.4s infinite;
-  }
-  @keyframes pulse{
-    0%{box-shadow:0 10px 26px rgba(62,207,142,0.4);}
-    50%{box-shadow:0 10px 26px rgba(62,207,142,0.4), 0 0 0 10px rgba(62,207,142,0.08);}
-    100%{box-shadow:0 10px 26px rgba(62,207,142,0.4);}
-  }
-
-  /* ============ RESPONSIVE ============ */
-  @media(max-width:980px){
-    .hero-grid{grid-template-columns:1fr;}
-    .services-grid{grid-template-columns:repeat(2,1fr);}
-    .process{grid-template-columns:repeat(2,1fr);row-gap:36px;}
-    .process-step:nth-child(2)::after{display:none;}
-    .testi-grid{grid-template-columns:1fr;}
-    .blog-grid{grid-template-columns:repeat(2,1fr);}
-    .blog-featured{grid-template-columns:1fr;}
-    .blog-featured-body{padding:32px;}
-    .footer-grid{grid-template-columns:1fr 1fr;}
-  }
-  @media(max-width:680px){
-    .nav-links{display:none;}
-    .burger{display:block;}
-    .nav-cta{padding:9px 16px;font-size:13px;}
-    section{padding:64px 0;}
-    .services-grid{grid-template-columns:1fr;}
-    .process{grid-template-columns:1fr;}
-    .process-step::after{display:none;}
-    .blog-grid{grid-template-columns:1fr;}
-    .deadline{flex-direction:column;align-items:flex-start;}
-    .final-cta{flex-direction:column;text-align:left;padding:44px 28px;}
-    .footer-grid{grid-template-columns:1fr;gap:32px;}
-    .trust-row{gap:20px;}
-    .strip .wrap{flex-direction:column;align-items:flex-start;}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JRH Consultoria — Assessoria Trabalhista, Previdenciária e Fiscal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
 </head>
 <body class="grain-bg">
 
-<!-- ============ HEADER ============ -->
-<header>
-  <nav>
-    <a href="#" class="logo">
-      <div class="logo-mark">JR</div>
-      JRH Consultoria
-    </a>
-    <div class="nav-links">
-      <a href="#servicos">Serviços</a>
-      <a href="#como-funciona">Como funciona</a>
-      <a href="#blog">Blog</a>
-      <a href="#depoimentos">Depoimentos</a>
-      <a href="#faq">Dúvidas</a>
-    </div>
-    <a href="#contato" class="nav-cta">Falar no WhatsApp</a>
-    <button class="burger">☰</button>
-  </nav>
-</header>
-
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">Declaração 2026 já pode ser enviada</span>
-      <h1>Pague menos imposto <span class="hl">de forma 100% legal.</span></h1>
-      <p class="lede">Perito em cálculo trabalhista e previdenciário cuida da sua declaração do zero, revisa os últimos 5 anos e corrige pendências antes que a Receita te encontre.</p>
-      <div class="hero-actions">
-        <a href="#contato" class="btn-primary">Simular minha restituição →</a>
-        <a href="#servicos" class="btn-ghost">Ver serviços</a>
+  <header>
+    <nav class="wrap">
+      <a href="#" class="logo">
+        <div class="logo-mark">JR</div>
+        <span>JRH Consultoria</span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#servicos">Serviços</a>
+        <a href="#como-funciona">Como Funciona</a>
+        <a href="#sobre">Diferenciais</a>
+        <a href="#faq">Dúvidas</a>
       </div>
-      <div class="trust-row">
-        <div class="trust-item">
-          <span class="trust-num">2.500+</span>
-          <span class="trust-label">clientes atendidos</span>
+      <a href="https://wa.me/5571982986844" target="_blank" class="nav-cta">Falar no WhatsApp</a>
+      <button class="burger" id="burgerBtn" aria-label="Abrir Menu">☰</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow">Assessoria Especializada & Perícia</span>
+        <h1>Soluções em <span class="hl">Cálculos, Imposto de Renda</span> e Gestão Fiscal.</h1>
+        <p class="lede">Especialista em cálculos trabalhistas, planejamento previdenciário e regularização do seu CPF ou MEI de forma rápida, descomplica e 100% segura.</p>
+        
+        <div class="hero-actions">
+          <a href="https://wa.me/5571982986844" target="_blank" class="btn-primary">Solicitar Atendimento →</a>
+          <a href="#servicos" class="btn-ghost">Ver Nossos Serviços</a>
         </div>
-        <div class="trust-item">
-          <span class="trust-num">5 anos</span>
-          <span class="trust-label">de histórico revisado</span>
-        </div>
-        <div class="trust-item">
-          <span class="trust-num">98%</span>
-          <span class="trust-label">livres de malha fina</span>
-        </div>
-      </div>
-    </div>
 
-    <!-- signature element: interactive refund simulator styled as a receipt -->
-    <div class="receipt">
-      <div class="receipt-top">
-        <div>
-          <span class="tag mono">SIMULADOR · JRH</span>
-          <h3>Estimativa de restituição</h3>
-        </div>
-        <span class="receipt-status">EM DIA</span>
-      </div>
-      <div class="receipt-body">
-        <div class="sim-row">
-          <label>Renda bruta anual</label>
-          <input type="range" min="20000" max="200000" value="72000" step="1000" class="sim-slider" id="rendaSlider">
-          <div class="sim-value mono" id="rendaValue">R$ 72.000</div>
-        </div>
-        <div class="sim-row">
-          <label>Dependentes</label>
-          <select class="sim-select" id="dependentes">
-            <option value="0">Nenhum</option>
-            <option value="1" selected>1 dependente</option>
-            <option value="2">2 dependentes</option>
-            <option value="3">3 ou mais</option>
-          </select>
-        </div>
-        <div class="sim-row" style="margin-bottom:0;">
-          <label>Gastos com saúde/educação no ano</label>
-          <input type="range" min="0" max="30000" value="6000" step="500" class="sim-slider" id="gastosSlider">
-          <div class="sim-value mono" id="gastosValue">R$ 6.000</div>
-        </div>
-        <div class="sim-divider"></div>
-        <div class="sim-result">
-          <span class="sim-result-label">Restituição estimada</span>
-          <span class="sim-result-value mono" id="resultValue">R$ 3.240</span>
-        </div>
-        <a href="#contato" class="receipt-cta">Confirmar valor com um perito →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ STRIP ============ -->
-<section class="strip" style="padding:28px 0;">
-  <div class="wrap">
-    <span class="strip-label">ÁREAS DE ATUAÇÃO</span>
-    <div class="strip-items">
-      <span>Imposto de Renda PF</span>
-      <span>MEI</span>
-      <span>Cálculo Trabalhista</span>
-      <span>Previdenciário</span>
-      <span>Malha Fina</span>
-      <span>Criptoativos</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SERVICES ============ -->
-<section id="servicos">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-eyebrow">O que fazemos</span>
-      <h2>Um cuidado completo com sua vida fiscal</h2>
-      <p>Da declaração anual à regularização de pendências antigas — tudo acompanhado por um especialista, sem juridiquês.</p>
-    </div>
-    <div class="services-grid">
-
-      <div class="service-card">
-        <div class="service-icon">📋</div>
-        <h3>Declaração de IR</h3>
-        <p>Envio completo da sua declaração anual, com revisão de todos os rendimentos, deduções e bens para garantir a maior restituição possível.</p>
-        <a href="#contato" class="service-link">Declarar agora →</a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🔍</div>
-        <h3>Revisão de 5 anos</h3>
-        <p>Analisamos suas últimas 5 declarações em busca de erros, valores esquecidos ou pendências que podem gerar restituição extra ou risco de malha fina.</p>
-        <a href="#contato" class="service-link">Pedir revisão →</a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🦺</div>
-        <h3>Malha fina e pendências</h3>
-        <p>Identificamos exatamente por que você caiu na malha fina e cuidamos de toda a regularização junto à Receita Federal até a liberação.</p>
-        <a href="#contato" class="service-link">Sair da malha fina →</a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🧮</div>
-        <h3>Cálculo trabalhista</h3>
-        <p>Perícia em cálculos de rescisão, verbas trabalhistas e revisões salariais com laudo técnico assinado por especialista.</p>
-        <a href="#contato" class="service-link">Solicitar cálculo →</a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">🏛️</div>
-        <h3>Planejamento previdenciário</h3>
-        <p>Simulamos o melhor momento e a melhor regra para sua aposentadoria, evitando perdas no valor do benefício.</p>
-        <a href="#contato" class="service-link">Planejar aposentadoria →</a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon">💼</div>
-        <h3>Assessoria MEI</h3>
-        <p>Abertura, regularização e gestão mensal do seu MEI, incluindo emissão de DAS e organização fiscal completa.</p>
-        <a href="#contato" class="service-link">Cuidar do meu MEI →</a>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============ DEADLINE BANNER ============ -->
-<section style="padding-top:0;">
-  <div class="wrap">
-    <div class="deadline">
-      <div class="deadline-left">
-        <h3>O prazo da declaração 2026 está correndo</h3>
-        <p>Entrega até 29 de maio. Quem perde o prazo paga multa mínima de R$ 165,74, podendo chegar a 20% do imposto devido.</p>
-      </div>
-      <div class="countdown">
-        <div class="countdown-box"><div class="num" id="cdDays">--</div><div class="lbl">DIAS</div></div>
-        <div class="countdown-box"><div class="num" id="cdHours">--</div><div class="lbl">HORAS</div></div>
-        <div class="countdown-box"><div class="num" id="cdMin">--</div><div class="lbl">MIN</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROCESS ============ -->
-<section id="como-funciona">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-eyebrow">Como funciona</span>
-      <h2>Do primeiro contato à sua restituição</h2>
-      <p>Um processo simples, feito majoritariamente pelo WhatsApp — sem filas e sem burocracia.</p>
-    </div>
-    <div class="process">
-      <div class="process-step">
-        <div class="process-num mono">01</div>
-        <h4>Envio de documentos</h4>
-        <p>Você manda informes de rendimento, CPF e comprovantes pelo WhatsApp, no seu tempo.</p>
-      </div>
-      <div class="process-step">
-        <div class="process-num mono">02</div>
-        <h4>Análise do perito</h4>
-        <p>Levantamos pendências, deduções esquecidas e o cenário fiscal completo do seu CPF.</p>
-      </div>
-      <div class="process-step">
-        <div class="process-num mono">03</div>
-        <h4>Conferência com você</h4>
-        <p>Apresentamos o valor estimado da restituição ou imposto a pagar antes de enviar qualquer coisa.</p>
-      </div>
-      <div class="process-step">
-        <div class="process-num mono">04</div>
-        <h4>Envio e acompanhamento</h4>
-        <p>Declaração enviada e monitorada até a restituição cair na sua conta — com garantia de 5 anos.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TESTIMONIALS ============ -->
-<section id="depoimentos">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-eyebrow">Quem já declarou com a gente</span>
-      <h2>Resultado real, sem letra miúda</h2>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p>"Achei que ia pagar imposto esse ano e a JRH encontrou dedução de plano de saúde que eu tinha esquecido. Virou restituição."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">MC</div>
-          <div>
-            <div class="testi-name">Marcos C.</div>
-            <div class="testi-role">Autônomo</div>
+        <div class="trust-row">
+          <div class="trust-item">
+            <span class="trust-num">100%</span>
+            <span class="trust-label">Atendimento Remoto</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-num">Rapidez</span>
+            <span class="trust-label">Análise de Documentos</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-num">Segurança</span>
+            <span class="trust-label">Sigilo & Sigilação Legal</span>
           </div>
         </div>
       </div>
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p>"Caí na malha fina em 2023 e fiquei dois anos sem saber o motivo. Em três semanas de acompanhamento já estava regularizado."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">RS</div>
+
+      <div class="receipt">
+        <div class="receipt-top">
           <div>
-            <div class="testi-name">Renata S.</div>
-            <div class="testi-role">Servidora pública</div>
+            <span class="tag mono">SIMULAÇÃO RÁPIDA</span>
+            <h3>Imposto de Renda & Retenção</h3>
           </div>
+          <span class="receipt-status">ONLINE</span>
         </div>
-      </div>
-      <div class="testi-card">
-        <div class="stars">★★★★★</div>
-        <p>"Atendimento todo pelo WhatsApp, sem enrolação. Me explicaram cada valor da declaração antes de enviar."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">FT</div>
-          <div>
-            <div class="testi-name">Felipe T.</div>
-            <div class="testi-role">MEI</div>
+        <div class="receipt-body">
+          <div class="sim-row">
+            <label for="rendaSlider">Renda Anual Aproximada</label>
+            <input type="range" min="20000" max="200000" value="60000" step="5000" class="sim-slider" id="rendaSlider">
+            <div class="sim-value mono" id="rendaValue">R$ 60.000</div>
           </div>
+          <div class="sim-row">
+            <label for="dependentes">Número de Dependentes</label>
+            <select class="sim-select" id="dependentes">
+              <option value="0">Nenhum dependente</option>
+              <option value="1" selected>1 dependente</option>
+              <option value="2">2 dependentes</option>
+              <option value="3">3 ou mais dependentes</option>
+            </select>
+          </div>
+          <div class="sim-row" style="margin-bottom:0;">
+            <label for="gastosSlider">Deduções (Saúde / Educação)</label>
+            <input type="range" min="0" max="30000" value="4000" step="1000" class="sim-slider" id="gastosSlider">
+            <div class="sim-value mono" id="gastosValue">R$ 4.000</div>
+          </div>
+          <div class="sim-divider"></div>
+          <div class="sim-result">
+            <span class="sim-result-label">Estimativa de Restituição</span>
+            <span class="sim-result-value mono" id="resultValue">R$ 2.450</span>
+          </div>
+          <a href="https://wa.me/5571982986844" target="_blank" class="receipt-cta">Confirmar Cálculo com Especialista →</a>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ BLOG ============ -->
-<section id="blog">
-  <div class="wrap">
-    <div class="blog-header-row">
+  <section class="strip">
+    <div class="wrap">
+      <span class="strip-label">ÁREAS DE ATUAÇÃO</span>
+      <div class="strip-items">
+        <span>Cálculos Trabalhistas</span>
+        <span>Aposentadoria & INSS</span>
+        <span>Imposto de Renda (IRPF)</span>
+        <span>MEI & Emissão de Notas</span>
+        <span>eSocial Doméstico</span>
+        <span>Conta GOV.br</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="sec-eyebrow">Nossos Serviços</span>
+        <h2>Soluções completas para Pessoas Físicas e MEI</h2>
+        <p>Atendimento especializado para organizar sua vida financeira, trabalhista e fiscal sem burocracia.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">⚖️</div>
+          <h3>Trabalhista & Rescisão</h3>
+          <p>Cálculos precisos para conferência de direitos trabalhistas e gestão de funcionários domésticos.</p>
+          <ul class="service-list">
+            <li>Cálculo trabalhista (rescisão, férias, 13º e horas extras)</li>
+            <li>Solicitação e orientação para Seguro Desemprego</li>
+            <li>Emissão de Carteira de Trabalho Digital</li>
+            <li>Gestão de Folha de pagamento / Doméstica e eSocial</li>
+          </ul>
+          <a href="https://wa.me/5571982986844" class="service-link">Consultar área trabalhista →</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏛️</div>
+          <h3>Previdenciário & INSS</h3>
+          <p>Planejamento e emissões para garantir o melhor benefício para sua aposentadoria.</p>
+          <ul class="service-list">
+            <li>Cálculo previdenciário para aposentadoria</li>
+            <li>Planejamento previdenciário (metas de benefício)</li>
+            <li>Emissão e regularização de guia do INSS</li>
+            <li>Suporte para conta GOV.br (Criação e recuperação de senha)</li>
+          </ul>
+          <a href="https://wa.me/5571982986844" class="service-link">Planejar aposentadoria →</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📋</div>
+          <h3>Imposto de Renda & Pessoa Física</h3>
+          <p>Tranquilidade e precisão na prestação de contas com a Receita Federal.</p>
+          <ul class="service-list">
+            <li>Declaração de Imposto de Renda Pessoa Física (IRPF)</li>
+            <li>Cadastro de Atividade Econômica (CAEPF)</li>
+            <li>Regularização de pendências e acompanhamento de malha fina</li>
+            <li>Análise e revisão de declarações</li>
+          </ul>
+          <a href="https://wa.me/5571982986844" class="service-link">Declarar IRPF →</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">💼</div>
+          <h3>Assessoria MEI</h3>
+          <p>Suporte completo para o Microempreendedor Individual manter seu negócio regularizado.</p>
+          <ul class="service-list">
+            <li>Abertura e estruturação de empresa MEI</li>
+            <li>Declaração Anual de Faturamento (DASN-SIMEI)</li>
+            <li>Emissão de Nota Fiscal Eletrônica</li>
+            <li>Serviços e regularizações de cadastro em geral</li>
+          </ul>
+          <a href="https://wa.me/5571982986844" class="service-link">Regularizar meu MEI →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-funciona" class="bg-alt">
+    <div class="wrap">
       <div class="sec-head">
-        <span class="sec-eyebrow">Central de conteúdo</span>
-        <h2>Imposto de renda sem mistério</h2>
-        <p>Traduzimos as regras da Receita Federal em explicações práticas, direto ao ponto.</p>
+        <span class="sec-eyebrow">Passo a Passo</span>
+        <h2>Como funciona o atendimento</h2>
+        <p>Processo simples, ágil e realizado 100% via WhatsApp para sua comodidade.</p>
       </div>
-      <a href="#" class="view-all">Ver todos os posts →</a>
-    </div>
 
-    <!-- featured post -->
-    <div class="blog-featured">
-      <div class="blog-featured-visual">
-        <span class="featured-badge">DESTAQUE</span>
-        <div class="mini-receipt">
-          <div class="line" style="width:80%"></div>
-          <div class="line short"></div>
-          <div class="line" style="width:70%"></div>
-          <div class="line gold"></div>
+      <div class="process">
+        <div class="process-step">
+          <div class="process-num mono">01</div>
+          <h4>Contato Inicial</h4>
+          <p>Você chama no WhatsApp e informa qual serviço ou análise precisa realizar.</p>
         </div>
-      </div>
-      <div class="blog-featured-body">
-        <div class="blog-date mono">10 MAR 2026 · IMPOSTO DE RENDA</div>
-        <h3>10 erros mais comuns que fazem você cair na malha fina</h3>
-        <p>De rendimentos omitidos a dependentes duplicados: reunimos os deslizes que mais travam declarações na Receita Federal — e como evitar cada um deles antes de enviar a sua.</p>
-        <a href="#" class="blog-read">Ler artigo completo →</a>
-      </div>
-    </div>
-
-    <div class="blog-grid">
-      <div class="blog-card">
-        <div class="blog-thumb"><span class="blog-cat">DEDUÇÕES</span><span class="thumb-icon">🩺</span></div>
-        <div class="blog-content">
-          <div class="blog-date mono">02 MAR 2026</div>
-          <h3>Despesas médicas: o que você pode deduzir</h3>
-          <p>Consultas, exames, planos de saúde e até próteses ortopédicas — veja a lista completa do que abate no seu imposto.</p>
-          <a href="#" class="blog-read">Ler mais →</a>
+        <div class="process-step">
+          <div class="process-num mono">02</div>
+          <h4>Envio de Documentos</h4>
+          <p>Apresentamos a lista de documentos necessária para fazermos a análise.</p>
         </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-thumb"><span class="blog-cat">PRAZOS</span><span class="thumb-icon">📅</span></div>
-        <div class="blog-content">
-          <div class="blog-date mono">23 FEV 2026</div>
-          <h3>Quem precisa declarar o Imposto de Renda 2026</h3>
-          <p>Rendimentos tributáveis acima de R$ 35,5 mil, bens acima de R$ 800 mil e outras regras que definem sua obrigatoriedade.</p>
-          <a href="#" class="blog-read">Ler mais →</a>
+        <div class="process-step">
+          <div class="process-num mono">03</div>
+          <h4>Análise & Relatório</h4>
+          <p>Realizamos os cálculos ou preparamos as declarações com total rigor técnico.</p>
         </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-thumb"><span class="blog-cat">CRIPTOATIVOS</span><span class="thumb-icon">₿</span></div>
-        <div class="blog-content">
-          <div class="blog-date mono">15 FEV 2026</div>
-          <h3>Ganhou em bets ou no "tigrinho"? Veja como declarar</h3>
-          <p>A tributação de apostas online muda conforme o valor do prêmio. Entenda o cálculo e evite dor de cabeça com o Leão.</p>
-          <a href="#" class="blog-read">Ler mais →</a>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-thumb"><span class="blog-cat">RESTITUIÇÃO</span><span class="thumb-icon">💰</span></div>
-        <div class="blog-content">
-          <div class="blog-date mono">08 FEV 2026</div>
-          <h3>Quem recebe primeiro a restituição do IRPF 2026</h3>
-          <p>Idosos, pessoas com doença grave e professores têm prioridade legal. Veja a ordem completa dos lotes de pagamento.</p>
-          <a href="#" class="blog-read">Ler mais →</a>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-thumb"><span class="blog-cat">DEPENDENTES</span><span class="thumb-icon">👨‍👩‍👧</span></div>
-        <div class="blog-content">
-          <div class="blog-date mono">30 JAN 2026</div>
-          <h3>Quem pode ser dependente na declaração</h3>
-          <p>Cônjuge, filhos, pais e até irmãos sob guarda judicial: entenda quem reduz seu imposto e quais os limites.</p>
-          <a href="#" class="blog-read">Ler mais →</a>
-        </div>
-      </div>
-
-      <div class="blog-card">
-        <div class="blog-thumb"><span class="blog-cat">IMÓVEIS</span><span class="thumb-icon">🏠</span></div>
-        <div class="blog-content">
-          <div class="blog-date mono">18 JAN 2026</div>
-          <h3>Vai vender um imóvel? Veja como pagar menos imposto</h3>
-          <p>Isenções legais para venda de imóveis, prazos de reinvestimento e como declarar corretamente o ganho de capital.</p>
-          <a href="#" class="blog-read">Ler mais →</a>
+        <div class="process-step">
+          <div class="process-num mono">04</div>
+          <h4>Entrega & Conclusão</h4>
+          <p>Apresentamos os resultados, enviamos as guias/comprovantes e tiramos suas dúvidas.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ============ FAQ ============ -->
-<section id="faq">
-  <div class="wrap">
-    <div class="sec-head center">
-      <span class="sec-eyebrow">Dúvidas frequentes</span>
-      <h2>Antes de você perguntar no WhatsApp</h2>
-    </div>
-    <div class="faq-list">
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head center">
+        <span class="sec-eyebrow">Tire Suas Dúvidas</span>
+        <h2>Perguntas Frequentes</h2>
+      </div>
 
-      <div class="faq-item open">
-        <div class="faq-q">
-          <h4>Preciso ter todos os documentos prontos para começar?</h4>
-          <div class="faq-icon">+</div>
+      <div class="faq-list">
+        <div class="faq-item open">
+          <div class="faq-q">
+            <h4>Como funciona o atendimento à distância?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">Todo o atendimento é feito através do WhatsApp e e-mail. Você envia as fotos ou documentos em PDF de onde estiver, sem precisar sair de casa.</div>
         </div>
-        <div class="faq-a">Não. Você começa enviando o que já tem — CPF e informe de rendimentos — e a equipe te orienta sobre o que ainda falta durante o processo.</div>
-      </div>
 
-      <div class="faq-item">
-        <div class="faq-q">
-          <h4>Quanto tempo demora para sair a restituição?</h4>
-          <div class="faq-icon">+</div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <h4>Perdi a senha do meu GOV.br, vocês conseguem recuperar?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">Sim! Realizamos a criação de conta nova ou o processo de recuperação de acesso à sua conta GOV.br com total segurança.</div>
         </div>
-        <div class="faq-a">Depende do lote em que sua declaração entra, que segue critérios de prioridade da Receita (idade, doença grave, magistério). Em média, entre 2 e 6 meses após o envio.</div>
-      </div>
 
-      <div class="faq-item">
-        <div class="faq-q">
-          <h4>Já caí na malha fina. Vocês conseguem resolver?</h4>
-          <div class="faq-icon">+</div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <h4>Como saber se o meu cálculo trabalhista está certo?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">Nós analisamos seu termo de rescisão, holerites, cartão de ponto e histórico de trabalho para recalcular todas as verbas e conferir se os pagamentos da empresa conferem com a legislação.</div>
         </div>
-        <div class="faq-a">Sim. Fazemos o levantamento completo das pendências junto à Receita Federal e cuidamos da regularização até a liberação da declaração.</div>
-      </div>
 
-      <div class="faq-item">
-        <div class="faq-q">
-          <h4>Atendem quem mora fora da Bahia?</h4>
-          <div class="faq-icon">+</div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <h4>Quais os prazos para entrega de declarações MEI e IRPF?</h4>
+            <div class="faq-icon">+</div>
+          </div>
+          <div class="faq-a">A Declaração Anual do MEI vence geralmente em 31 de Maio. O Imposto de Renda ocorre no primeiro semestre de cada ano. É fundamental declarar no prazo para evitar multas.</div>
         </div>
-        <div class="faq-a">Sim, todo o atendimento é feito remotamente pelo WhatsApp e e-mail, então funciona para qualquer lugar do Brasil.</div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-q">
-          <h4>Existe garantia sobre o serviço?</h4>
-          <div class="faq-icon">+</div>
-        </div>
-        <div class="faq-a">Sim, oferecemos garantia de 5 anos sobre o serviço prestado, cobrindo qualquer necessidade de correção ou esclarecimento junto à Receita.</div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============ FINAL CTA ============ -->
-<section id="contato">
-  <div class="wrap">
-    <div class="final-cta">
-      <div class="final-cta-text">
-        <h2>Vamos calcular sua restituição agora?</h2>
-        <p>Fale agora com um especialista pelo WhatsApp e receba uma estimativa gratuita em minutos.</p>
-      </div>
-      <a href="https://wa.me/557182986844" target="_blank" class="final-cta-btn">💬 Chamar no WhatsApp</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FOOTER ============ -->
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#" class="logo">
-          <div class="logo-mark">JR</div>
-          JRH Consultoria
-        </a>
-        <p>Perícia em cálculo trabalhista e previdenciário, consultoria fiscal e assessoria completa de Imposto de Renda para pessoa física e MEI.</p>
-        <div class="footer-social">
-          <a href="#">in</a>
-          <a href="#">ig</a>
-          <a href="#">wa</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h5>Serviços</h5>
-        <a href="#servicos">Declaração de IR</a>
-        <a href="#servicos">Revisão de 5 anos</a>
-        <a href="#servicos">Malha fina</a>
-        <a href="#servicos">Cálculo trabalhista</a>
-        <a href="#servicos">MEI</a>
-      </div>
-      <div class="footer-col">
-        <h5>Empresa</h5>
-        <a href="#como-funciona">Como funciona</a>
-        <a href="#depoimentos">Depoimentos</a>
-        <a href="#blog">Blog</a>
-        <a href="#faq">Dúvidas frequentes</a>
-      </div>
-      <div class="footer-col">
-        <h5>Contato</h5>
-        <a href="https://wa.me/557182986844">(71) 9 8298-6844</a>
-        <a href="mailto:juniorrhconsultoria@gmail.com">juniorrhconsultoria@gmail.com</a>
-        <a href="#">Bahia · Atendimento remoto</a>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 JRH Consultoria. Modelo de site — identidade ilustrativa.</span>
-      <span>CNPJ fictício para fins de demonstração</span>
+  </section>
+
+  <section id="contato">
+    <div class="wrap">
+      <div class="final-cta">
+        <div class="final-cta-text">
+          <h2>Precisa de suporte especializado?</h2>
+          <p>Fale diretamente com o consultor responsável via WhatsApp e tire suas dúvidas agora mesmo.</p>
+        </div>
+        <a href="https://wa.me/5571982986844" target="_blank" class="final-cta-btn">💬 Conversar pelo WhatsApp</a>
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
 
-<a href="https://wa.me/557182986844" target="_blank" class="wa-float">💬</a>
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <div class="logo-mark">JR</div>
+            <span>JRH Consultoria</span>
+          </a>
+          <p>Assessoria especializada em cálculos trabalhistas, planejamento previdenciário, Imposto de Renda e gestão para MEI.</p>
+        </div>
 
-<script>
-  // ---- Simulator logic ----
-  const rendaSlider = document.getElementById('rendaSlider');
-  const gastosSlider = document.getElementById('gastosSlider');
-  const dependentes = document.getElementById('dependentes');
-  const rendaValue = document.getElementById('rendaValue');
-  const gastosValue = document.getElementById('gastosValue');
-  const resultValue = document.getElementById('resultValue');
+        <div class="footer-col">
+          <h5>Serviços</h5>
+          <a href="#servicos">Cálculos Trabalhistas</a>
+          <a href="#servicos">Aposentadoria / INSS</a>
+          <a href="#servicos">Imposto de Renda</a>
+          <a href="#servicos">Gestão MEI & eSocial</a>
+        </div>
 
-  function formatBRL(v){
-    return 'R$ ' + Math.round(v).toLocaleString('pt-BR');
-  }
+        <div class="footer-col">
+          <h5>Navegação</h5>
+          <a href="#servicos">O que fazemos</a>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#faq">Perguntas frequentes</a>
+        </div>
 
-  function calcSim(){
-    const renda = parseFloat(rendaSlider.value);
-    const gastos = parseFloat(gastosSlider.value);
-    const deps = parseInt(dependentes.value);
+        <div class="footer-col">
+          <h5>Contato Directo</h5>
+          <a href="https://wa.me/5571982986844">(71) 9 8298-6844</a>
+          <a href="mailto:juniorrhconsultoria@gmail.com">juniorrhconsultoria@gmail.com</a>
+          <a href="https://instagram.com/Junnior_rh" target="_blank">Instagram: @Junnior_rh</a>
+        </div>
+      </div>
 
-    rendaValue.textContent = formatBRL(renda);
-    gastosValue.textContent = formatBRL(gastos);
+      <div class="footer-bottom">
+        <span>© 2026 JRH Consultoria — Todos os direitos reservados.</span>
+        <span>Atendimento em Salvador - BA e todo o Brasil.</span>
+      </div>
+    </div>
+  </footer>
 
-    // simplified illustrative estimate, not real tax calculation
-    const depDeduction = deps * 2275.08;
-    const baseDeduction = 16754.34; // simplified annual desconto simplificado approx
-    const taxableBase = Math.max(renda - Math.max(gastos + depDeduction, baseDeduction), 0);
-    let aliquota = 0;
-    if(taxableBase > 55000) aliquota = 0.275;
-    else if(taxableBase > 42000) aliquota = 0.225;
-    else if(taxableBase > 33000) aliquota = 0.15;
-    else if(taxableBase > 25000) aliquota = 0.075;
+  <a href="https://wa.me/5571982986844" target="_blank" class="wa-float" aria-label="WhatsApp">💬</a>
 
-    const estimatedRefund = Math.max((gastos + depDeduction) * aliquota + 250, 180);
-    resultValue.textContent = formatBRL(estimatedRefund);
-  }
-
-  [rendaSlider, gastosSlider, dependentes].forEach(el => el.addEventListener('input', calcSim));
-  calcSim();
-
-  // ---- FAQ accordion ----
-  document.querySelectorAll('.faq-item').forEach(item => {
-    item.querySelector('.faq-q').addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if(!isOpen) item.classList.add('open');
-    });
-  });
-
-  // ---- Countdown to May 29, 2026 ----
-  function updateCountdown(){
-    const deadline = new Date('2026-05-29T23:59:59');
-    const now = new Date();
-    const diff = deadline - now;
-    if(diff <= 0){
-      document.getElementById('cdDays').textContent = '0';
-      document.getElementById('cdHours').textContent = '0';
-      document.getElementById('cdMin').textContent = '0';
-      return;
-    }
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-    const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
-    document.getElementById('cdDays').textContent = days;
-    document.getElementById('cdHours').textContent = hours;
-    document.getElementById('cdMin').textContent = mins;
-  }
-  updateCountdown();
-  setInterval(updateCountdown, 60000);
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
