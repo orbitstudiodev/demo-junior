@@ -55,6 +55,45 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ---- Carrossel de Serviços (Mobile) ----
+  const servicesGrid = document.querySelector('.services-grid');
+  const servicesDots = document.getElementById('servicesDots');
+
+  if (servicesGrid && servicesDots) {
+    const cards = servicesGrid.querySelectorAll('.service-card');
+
+    cards.forEach((_, i) => {
+      const dot = document.createElement('span');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        cards[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      });
+      servicesDots.appendChild(dot);
+    });
+
+    const dots = servicesDots.querySelectorAll('span');
+
+    function updateActiveDot() {
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+      cards.forEach((card, i) => {
+        const distance = Math.abs(card.getBoundingClientRect().left - servicesGrid.getBoundingClientRect().left);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = i;
+        }
+      });
+      dots.forEach(d => d.classList.remove('active'));
+      if (dots[closestIndex]) dots[closestIndex].classList.add('active');
+    }
+
+    let scrollTimeout;
+    servicesGrid.addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(updateActiveDot, 100);
+    });
+  }
+
   // ---- Menu Hambúrguer (Mobile) ----
   const burgerBtn = document.getElementById('burgerBtn');
   const navLinks = document.getElementById('navLinks');
