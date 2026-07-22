@@ -1,5 +1,6 @@
 :root {
   --navy-deep: #0B1229;
+  --navy-hero: #162051;
   --navy-card: #141B3C;
   --navy-mid: #1E2A5E;
   --navy-line: #26326a;
@@ -173,6 +174,11 @@ nav {
 /* ============ HERO ============ */
 .hero {
   padding: 80px 0 60px;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(245, 183, 0, 0.07), transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(62, 207, 142, 0.04), transparent 35%),
+    var(--navy-hero);
+  border-bottom: 1px solid var(--navy-line);
 }
 
 .hero-grid {
@@ -854,6 +860,54 @@ footer {
   }
 
   .logo .brand-sub {
+    display: none;
+  }
+
+  /* ---- Carrossel de Serviços (mobile) ---- */
+  .services-grid {
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    margin: 0 -24px;
+    padding: 4px 24px 12px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .services-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .service-card {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+
+  .services-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .services-dots span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--navy-line);
+    transition: background 0.25s, transform 0.25s;
+  }
+
+  .services-dots span.active {
+    background: var(--gold);
+    transform: scale(1.2);
+  }
+}
+
+@media(min-width: 681px) {
+  .services-dots {
     display: none;
   }
 }
